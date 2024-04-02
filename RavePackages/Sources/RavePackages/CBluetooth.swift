@@ -44,8 +44,8 @@ class CBluetoothCentralVM : NSObject, ObservableObject{
         var runCount = 0
         Timer.scheduledTimer(withTimeInterval: 30, repeats: false){timer in
             self.central!.stopScan()//delete all discovered peripherials
+            self.scanning = false
         }
-        scanning = false
     }
     
     
