@@ -22,27 +22,62 @@ import Foundation
 
 
 //Service Class / Partial ViewModel to handle central's blt events and UI events
-class CBluetoothCentral : NSObject, ObservableObject{
+class CBluetoothCentralVM : NSObject, ObservableObject{
     private var central : CBCentralManager?
     @Published var connectedPeripherials: [CBPeripheral] = []
+    @Published var peripherials : [CBPeripheral] = []
     @Published var  connected =  false
+    @Published var scanning = false
     //private var eventQ :[BltState] =  []
     override init(){
         super.init()
-        self.central = CBCentralManager(delegate: self, queue: .main)
+        self.central = CBCentral(delegate: self, queue: .main)//have to setup self first so CBCentralManager is init after
     }
+    
+    func connectPeripherial(Index idx : Int){
+        print("try connecting peripherial:\(idx) \(peripherials[idx].name!)")
+    }
+    
+    func tryScan(){
+        scanning = true
+        central!.scanForPeripherals(withServices: <#T##[CBUUID]?#>)
+        var runCount = 0
+        Timer.scheduledTimer(withTimeInterval: 30, repeats: false){timer in
+            self.central!.stopScan()//delete all discovered peripherials
+        }
+        scanning = false
+    }
+    
+    
+}
+
+
+//Inherieted to implemnt timers
+//CBCentralManager use for CBUUID:(...) service
+class CBCentral : CBCentralManager{
+    init(delegate : CBCentralManagerDelegate, queue : DispatchQueue){
+        super.init(delegate: delegate , queue: queue,options: [:])
+    }
+  
+    
 }
 
 
 
-extension CBluetoothCentral : CBCentralManagerDelegate{
+extension CBluetoothCentralVM : CBCentralManagerDelegate{
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn{
             //Try to discover and set timer to stop trying
         } else{
-           connectedPeripherials = []
         }
         
+    }
+    
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if !peripherials.contains(peripheral){
+            self.peripherials.append(peripheral)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
