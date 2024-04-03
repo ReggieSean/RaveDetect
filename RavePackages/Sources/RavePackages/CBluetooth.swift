@@ -37,8 +37,8 @@ class CBluetoothCentralVM : NSObject, ObservableObject{
     func connectPeripherial(Index idx : Int){
         print("try connecting peripherial:\(idx) \(peripherials[idx].name!)")
         self.central!.connect(peripherials[idx])
-        Timer.scheduledTimer(withTimeInterval: 30, repeats: false){timer in
-            self.central!.cancelPeripheralConnection(self.peripherials[idx])
+        Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
+            self?.central!.cancelPeripheralConnection((self?.peripherials[idx])!)
         }
     }
     
@@ -46,9 +46,9 @@ class CBluetoothCentralVM : NSObject, ObservableObject{
         scanning = true
         central!.scanForPeripherals(withServices: <#T##[CBUUID]?#>)
         var runCount = 0
-        Timer.scheduledTimer(withTimeInterval: 30, repeats: false){timer in
-            self.central!.stopScan()//delete all discovered peripherials
-            self.scanning = false
+        Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
+            self?.central!.stopScan()//delete all discovered peripherials
+            self?.scanning = false
         }
     }
     
