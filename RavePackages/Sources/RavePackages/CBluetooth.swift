@@ -22,33 +22,43 @@ import Foundation
 
 
 //Service Class / Partial ViewModel to handle central's blt events and UI events
-class CBluetoothCentralVM : NSObject, ObservableObject{
+public class CBluetoothCentralVM : NSObject, ObservableObject{
     private var central : CBCentralManager?
-    @Published var connectedPeripherials: [CBPeripheral] = []
-    @Published var peripherials : [CBPeripheral] = []
+    @Published public var connectedPeripherials: [CBPeripheral] = []
+    @Published public var peripherials : [CBPeripheral] = []
     @Published var  connected =  false
     @Published var scanning = false
     //private var eventQ :[BltState] =  []
-    override init(){
+    override public init(){
         super.init()
         self.central = CBCentral(delegate: self, queue: .main)//have to setup self first so CBCentralManager is init after
+        print("CBCentral finished init")
+        print("CBCentral state \(self.central!.state)")
     }
+    
+    
     
     func connectPeripherial(Index idx : Int){
         print("try connecting peripherial:\(idx) \(peripherials[idx].name!)")
         self.central!.connect(peripherials[idx])
         Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
-            self?.central!.cancelPeripheralConnection((self?.peripherials[idx])!)
+            if !(self!.connected){
+                self!.central!.cancelPeripheralConnection((self?.peripherials[idx])!)
+            }
         }
     }
     
-    func tryScan(){
-        scanning = true
-        central!.scanForPeripherals(withServices: <#T##[CBUUID]?#>)
-        var runCount = 0
-        Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
-            self?.central!.stopScan()//delete all discovered peripherials
-            self?.scanning = false
+    public func tryScan(){
+        if(central!.state == .poweredOn && !central!.isScanning){
+            print("Trying to scan")
+            scanning = true
+            central!.scanForPeripherals(withServices: [CBUUID.serivceUUID])
+            var runCount = 0
+            Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
+                self?.central!.stopScan()//delete all discovered peripherials
+                self?.scanning = false
+                
+            }
         }
     }
     
@@ -69,23 +79,40 @@ class CBCentral : CBCentralManager{
 
 
 extension CBluetoothCentralVM : CBCentralManagerDelegate{
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn{
-            //Try to discover and set timer to stop trying
-        } else{
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state{
+                
+            case .unknown:
+                print("Central update to state unknown")
+            case .resetting:
+                print("Central update to state resetting")
+            case .unsupported:
+                print("Central update to state unsupported")
+            case .unauthorized:
+                print("Central update to state unauthorized")
+            case .poweredOff:
+                print("Central update to state poweredOff")
+            case .poweredOn:
+                print("Central update to state poweredOn")
+                tryScan()
+            @unknown default:
+                print("Central update to state default")
         }
         
     }
     
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+   public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if !peripherials.contains(peripheral){
             self.peripherials.append(peripheral)
+            print("Discovered: \(peripheral)")
+            
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("connected:\(peripheral.identifier)")
+        self.connected = true
         //Timer to disconnect after action
         
     }

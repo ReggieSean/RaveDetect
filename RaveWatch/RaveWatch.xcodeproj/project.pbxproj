@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2251376B2BC09A3400131A57 /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 2251376A2BC09A3400131A57 /* RavePackages */; };
 		22F8D39F2BB3CA4800C468CA /* RaveWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22F8D39E2BB3CA4800C468CA /* RaveWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22F8D3A42BB3CA4800C468CA /* RaveWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3A32BB3CA4800C468CA /* RaveWatchApp.swift */; };
 		22F8D3A62BB3CA4800C468CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3A52BB3CA4800C468CA /* ContentView.swift */; };
@@ -21,14 +22,8 @@
 		22F8D3D92BB5094700C468CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3D82BB5094700C468CA /* ContentView.swift */; };
 		22F8D3DB2BB5094800C468CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D3DA2BB5094800C468CA /* Assets.xcassets */; };
 		22F8D3DE2BB5094800C468CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D3DD2BB5094800C468CA /* Preview Assets.xcassets */; };
-		22F8D3E82BB5F3A300C468CA /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22F8D3E72BB5F3A300C468CA /* RavePackages */; };
 		22F8D3EA2BB5F3AE00C468CA /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22F8D3E92BB5F3AE00C468CA /* RavePackages */; };
 		22F8D3EC2BB5F3B100C468CA /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22F8D3EB2BB5F3B100C468CA /* RavePackages */; };
-		22F8D3F52BB605FD00C468CA /* MacWatchBLT Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22F8D3F42BB605FD00C468CA /* MacWatchBLT Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		22F8D3FA2BB605FD00C468CA /* MacWatchBLTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3F92BB605FD00C468CA /* MacWatchBLTApp.swift */; };
-		22F8D3FC2BB605FD00C468CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3FB2BB605FD00C468CA /* ContentView.swift */; };
-		22F8D3FE2BB605FE00C468CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D3FD2BB605FE00C468CA /* Assets.xcassets */; };
-		22F8D4012BB605FE00C468CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F8D4002BB605FE00C468CA /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,13 +40,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 22F8D3D02BB5094700C468CA;
 			remoteInfo = "GyroWatch Watch App";
-		};
-		22F8D3F62BB605FD00C468CA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22F8D3922BB3CA4800C468CA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F8D3F32BB605FD00C468CA;
-			remoteInfo = "MacWatchBLT Watch App";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -78,20 +66,10 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F8D4052BB605FE00C468CA /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				22F8D3F52BB605FD00C468CA /* MacWatchBLT Watch App.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2227F95F2BC0E7F100E03E8F /* GyroWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GyroWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		22F8D3982BB3CA4800C468CA /* RaveWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F8D39E2BB3CA4800C468CA /* RaveWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RaveWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F8D3A32BB3CA4800C468CA /* RaveWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaveWatchApp.swift; sourceTree = "<group>"; };
@@ -111,12 +89,6 @@
 		22F8D3D82BB5094700C468CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		22F8D3DA2BB5094800C468CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22F8D3DD2BB5094800C468CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		22F8D3EF2BB605FD00C468CA /* MacWatchBLT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacWatchBLT.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F8D3F42BB605FD00C468CA /* MacWatchBLT Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MacWatchBLT Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		22F8D3F92BB605FD00C468CA /* MacWatchBLTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWatchBLTApp.swift; sourceTree = "<group>"; };
-		22F8D3FB2BB605FD00C468CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		22F8D3FD2BB605FE00C468CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22F8D4002BB605FE00C468CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,14 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22F8D3E82BB5F3A300C468CA /* RavePackages in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F8D3F12BB605FD00C468CA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				2251376B2BC09A3400131A57 /* RavePackages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +126,6 @@
 				22F8D3A22BB3CA4800C468CA /* RaveWatch Watch App */,
 				22F8D3BC2BB508DD00C468CA /* RaveMac */,
 				22F8D3D52BB5094700C468CA /* GyroWatch Watch App */,
-				22F8D3F82BB605FD00C468CA /* MacWatchBLT Watch App */,
 				22F8D3992BB3CA4800C468CA /* Products */,
 				22F8D3E62BB5F39800C468CA /* Frameworks */,
 			);
@@ -175,8 +139,6 @@
 				22F8D3BB2BB508DD00C468CA /* RaveMac.app */,
 				22F8D3CC2BB5094700C468CA /* GyroWatch.app */,
 				22F8D3D12BB5094700C468CA /* GyroWatch Watch App.app */,
-				22F8D3EF2BB605FD00C468CA /* MacWatchBLT.app */,
-				22F8D3F42BB605FD00C468CA /* MacWatchBLT Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,6 +185,7 @@
 		22F8D3D52BB5094700C468CA /* GyroWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				2227F95F2BC0E7F100E03E8F /* GyroWatch-Watch-App-Info.plist */,
 				22F8D3D62BB5094700C468CA /* GyroWatchApp.swift */,
 				22F8D3D82BB5094700C468CA /* ContentView.swift */,
 				22F8D3DA2BB5094800C468CA /* Assets.xcassets */,
@@ -244,25 +207,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		22F8D3F82BB605FD00C468CA /* MacWatchBLT Watch App */ = {
-			isa = PBXGroup;
-			children = (
-				22F8D3F92BB605FD00C468CA /* MacWatchBLTApp.swift */,
-				22F8D3FB2BB605FD00C468CA /* ContentView.swift */,
-				22F8D3FD2BB605FE00C468CA /* Assets.xcassets */,
-				22F8D3FF2BB605FE00C468CA /* Preview Content */,
-			);
-			path = "MacWatchBLT Watch App";
-			sourceTree = "<group>";
-		};
-		22F8D3FF2BB605FE00C468CA /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				22F8D4002BB605FE00C468CA /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,44 +300,10 @@
 			);
 			name = "GyroWatch Watch App";
 			packageProductDependencies = (
-				22F8D3E72BB5F3A300C468CA /* RavePackages */,
+				2251376A2BC09A3400131A57 /* RavePackages */,
 			);
 			productName = "GyroWatch Watch App";
 			productReference = 22F8D3D12BB5094700C468CA /* GyroWatch Watch App.app */;
-			productType = "com.apple.product-type.application";
-		};
-		22F8D3EE2BB605FD00C468CA /* MacWatchBLT */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F8D4062BB605FE00C468CA /* Build configuration list for PBXNativeTarget "MacWatchBLT" */;
-			buildPhases = (
-				22F8D3ED2BB605FD00C468CA /* Resources */,
-				22F8D4052BB605FE00C468CA /* Embed Watch Content */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22F8D3F72BB605FD00C468CA /* PBXTargetDependency */,
-			);
-			name = MacWatchBLT;
-			productName = MacWatchBLT;
-			productReference = 22F8D3EF2BB605FD00C468CA /* MacWatchBLT.app */;
-			productType = "com.apple.product-type.application.watchapp2-container";
-		};
-		22F8D3F32BB605FD00C468CA /* MacWatchBLT Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F8D4022BB605FE00C468CA /* Build configuration list for PBXNativeTarget "MacWatchBLT Watch App" */;
-			buildPhases = (
-				22F8D3F02BB605FD00C468CA /* Sources */,
-				22F8D3F12BB605FD00C468CA /* Frameworks */,
-				22F8D3F22BB605FD00C468CA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "MacWatchBLT Watch App";
-			productName = "MacWatchBLT Watch App";
-			productReference = 22F8D3F42BB605FD00C468CA /* MacWatchBLT Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -421,12 +331,6 @@
 					22F8D3D02BB5094700C468CA = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
-					22F8D3EE2BB605FD00C468CA = {
-						CreatedOnToolsVersion = 15.0.1;
-					};
-					22F8D3F32BB605FD00C468CA = {
-						CreatedOnToolsVersion = 15.0.1;
-					};
 				};
 			};
 			buildConfigurationList = 22F8D3952BB3CA4800C468CA /* Build configuration list for PBXProject "RaveWatch" */;
@@ -447,8 +351,6 @@
 				22F8D3BA2BB508DD00C468CA /* RaveMac */,
 				22F8D3CB2BB5094700C468CA /* GyroWatch */,
 				22F8D3D02BB5094700C468CA /* GyroWatch Watch App */,
-				22F8D3EE2BB605FD00C468CA /* MacWatchBLT */,
-				22F8D3F32BB605FD00C468CA /* MacWatchBLT Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -495,22 +397,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F8D3ED2BB605FD00C468CA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22F8D3F22BB605FD00C468CA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F8D4012BB605FE00C468CA /* Preview Assets.xcassets in Resources */,
-				22F8D3FE2BB605FE00C468CA /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -541,15 +427,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22F8D3F02BB605FD00C468CA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22F8D3FC2BB605FD00C468CA /* ContentView.swift in Sources */,
-				22F8D3FA2BB605FD00C468CA /* MacWatchBLTApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -562,11 +439,6 @@
 			isa = PBXTargetDependency;
 			target = 22F8D3D02BB5094700C468CA /* GyroWatch Watch App */;
 			targetProxy = 22F8D3D32BB5094700C468CA /* PBXContainerItemProxy */;
-		};
-		22F8D3F72BB605FD00C468CA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F8D3F32BB605FD00C468CA /* MacWatchBLT Watch App */;
-			targetProxy = 22F8D3F62BB605FD00C468CA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -688,6 +560,7 @@
 		22F8D3AF2BB3CA4900C468CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -718,6 +591,7 @@
 		22F8D3B02BB3CA4900C468CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -842,6 +716,7 @@
 		22F8D3E02BB5094800C468CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -850,7 +725,9 @@
 				DEVELOPMENT_TEAM = J3JH7QQGHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "GyroWatch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GyroWatch;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is needed to detect";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -872,6 +749,7 @@
 		22F8D3E12BB5094800C468CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -880,7 +758,9 @@
 				DEVELOPMENT_TEAM = J3JH7QQGHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "GyroWatch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GyroWatch;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is needed to detect";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -926,100 +806,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = GyroWatch;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Sean.GyroWatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		22F8D4032BB605FE00C468CA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MacWatchBLT Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = J3JH7QQGHX;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MacWatchBLT;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Sean.MacWatchBLT.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Debug;
-		};
-		22F8D4042BB605FE00C468CA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MacWatchBLT Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = J3JH7QQGHX;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MacWatchBLT;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKWatchOnly = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Sean.MacWatchBLT.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Release;
-		};
-		22F8D4072BB605FE00C468CA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J3JH7QQGHX;
-				INFOPLIST_KEY_CFBundleDisplayName = MacWatchBLT;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Sean.MacWatchBLT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		22F8D4082BB605FE00C468CA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J3JH7QQGHX;
-				INFOPLIST_KEY_CFBundleDisplayName = MacWatchBLT;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Sean.MacWatchBLT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -1084,28 +870,10 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F8D4022BB605FE00C468CA /* Build configuration list for PBXNativeTarget "MacWatchBLT Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F8D4032BB605FE00C468CA /* Debug */,
-				22F8D4042BB605FE00C468CA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22F8D4062BB605FE00C468CA /* Build configuration list for PBXNativeTarget "MacWatchBLT" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F8D4072BB605FE00C468CA /* Debug */,
-				22F8D4082BB605FE00C468CA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		22F8D3E72BB5F3A300C468CA /* RavePackages */ = {
+		2251376A2BC09A3400131A57 /* RavePackages */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RavePackages;
 		};
