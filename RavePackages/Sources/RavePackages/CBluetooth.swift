@@ -7,6 +7,7 @@
 
 import CoreBluetooth
 import Foundation
+import Combine
 
 //CoreBluetooth does not handle timeout by itself, it is developers' job
 //to handle the events produced by CoreBluetooth framework
@@ -22,6 +23,7 @@ import Foundation
 
 
 //Service Class / Partial ViewModel to handle central's blt events and UI events
+@available(macOS 10.15, *)
 public class CBluetoothCentralVM : NSObject, ObservableObject{
     private var central : CBCentralManager?
     @Published public var connectedPeripherials: [CBPeripheral] = []
@@ -77,7 +79,7 @@ class CBCentral : CBCentralManager{
 }
 
 
-
+@available(macOS 10.15, *)
 extension CBluetoothCentralVM : CBCentralManagerDelegate{
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state{
@@ -106,7 +108,6 @@ extension CBluetoothCentralVM : CBCentralManagerDelegate{
         if !peripherials.contains(peripheral){
             self.peripherials.append(peripheral)
             print("Discovered: \(peripheral)")
-            
         }
     }
     
@@ -114,13 +115,80 @@ extension CBluetoothCentralVM : CBCentralManagerDelegate{
         print("connected:\(peripheral.identifier)")
         self.connected = true
         //Timer to disconnect after action
-        
     }
     
 }
 
 //Service Class / Partial ViewModel to handle peripherial's blt events and UI events
-class CBluetoothPeripherial : NSObject, ObservableObject{
+@available(macOS 10.15, *)
+public class CBluetoothPeripherialVM : NSObject, ObservableObject{
+    private var peripheral : CBPeripheralManager?
+    @Published public var  connected =  false
+    @Published public var  advertising = false
+    var  timer : Cancellable?
+    @Published public var timeRemaining : Int = 30
+  
+    public override init() {
+        super.init()
+        resetTimer()
+        self.peripheral = CBPeripheralManager(delegate: self, queue: .main)
+    }
+    
+    public func cancelTimer(){
+        timer?.cancel()
+    }
+    
+    private func resetTimer (){
+        timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
+            if(self!.advertising){
+                self!.timeRemaining = ((self!.timeRemaining - 1) + 30) % 30
+                self!.timeRemaining = self!.timeRemaining == 0 ?  30 : self!.timeRemaining
+                print(self!.timeRemaining)
+            }
+        }
+    }
+   
+    
+    public func tryAdvertise(){
+        if(peripheral!.state == .poweredOn && !peripheral!.isAdvertising){
+            print("Trying to advertise")
+            advertising = true
+            peripheral?.startAdvertising([CBAdvertisementDataServiceUUIDsKey:CBUUID.serivceUUID])
+            //peripherial!.scanForPeripherals(withServices: [CBUUID.serivceUUID])
+            Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
+                self?.peripheral!.stopAdvertising()//delete all discovered peripherials
+                self?.advertising = false
+            }
+        }
+    }
+}
+
+@available(macOS 10.15, *)
+extension CBluetoothPeripherialVM : CBPeripheralManagerDelegate{
+    public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        switch peripheral.state{
+                
+            case .unknown:
+                print("Central update to state unknown")
+            case .resetting:
+                print("Central update to state resetting")
+            case .unsupported:
+                print("Central update to state unsupported")
+            case .unauthorized:
+                print("Central update to state unauthorized")
+            case .poweredOff:
+                print("Central update to state poweredOff")
+            case .poweredOn:
+                print("Central update to state poweredOn")
+                
+            @unknown default:
+                print("Central update to state default")
+        }
+    }
+    
+    public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        print("\(peripheral.description) started adevertising" )
+    }
     
 }
 
