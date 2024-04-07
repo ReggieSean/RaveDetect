@@ -74,8 +74,6 @@ class CBCentral : CBCentralManager{
     init(delegate : CBCentralManagerDelegate, queue : DispatchQueue){
         super.init(delegate: delegate , queue: queue,options: [:])
     }
-  
-    
 }
 
 
@@ -134,19 +132,26 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
         self.peripheral = CBPeripheralManager(delegate: self, queue: .main)
     }
     
-    public func cancelTimer(){
+    public func cancelAdvertising(){
         timer?.cancel()
+        advertising = false
+        peripheral?.stopAdvertising()
+        timeRemaining = 30
+        resetTimer()
     }
     
-    private func resetTimer (){
+    private func resetTimer(){
         timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
             if(self!.advertising){
                 self!.timeRemaining = ((self!.timeRemaining - 1) + 30) % 30
-                self!.timeRemaining = self!.timeRemaining == 0 ?  30 : self!.timeRemaining
+                if(self!.timeRemaining == 0){
+                    self!.cancelAdvertising()
+                }
                 print(self!.timeRemaining)
             }
         }
     }
+    
    
     
     public func tryAdvertise(){
@@ -154,11 +159,6 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
             print("Trying to advertise")
             advertising = true
             peripheral?.startAdvertising([CBAdvertisementDataServiceUUIDsKey:CBUUID.serivceUUID])
-            //peripherial!.scanForPeripherals(withServices: [CBUUID.serivceUUID])
-            Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
-                self?.peripheral!.stopAdvertising()//delete all discovered peripherials
-                self?.advertising = false
-            }
         }
     }
 }
