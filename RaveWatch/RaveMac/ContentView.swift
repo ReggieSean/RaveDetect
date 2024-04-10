@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         let _ = Self._printChanges()
         VStack {
-            Button(action:{vm.advertising = !vm.advertising}){
+            Button(action:{vm.flipAdvertising()}){
                 Text(vm.advertising ? "Stop advertising" : "Start advertising")
             }
             Text("Time left : \(vm.timeRemaining)")

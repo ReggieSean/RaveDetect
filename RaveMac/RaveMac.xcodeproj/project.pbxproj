@@ -3,30 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22BF4FA92BB3C2060042594D /* RaveMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF4FA82BB3C2060042594D /* RaveMacApp.swift */; };
-		22BF4FAB2BB3C2060042594D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF4FAA2BB3C2060042594D /* ContentView.swift */; };
-		22BF4FAD2BB3C2070042594D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BF4FAC2BB3C2070042594D /* Assets.xcassets */; };
-		22BF4FB02BB3C2070042594D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BF4FAF2BB3C2070042594D /* Preview Assets.xcassets */; };
+		22EAC9222BC653790053AD90 /* RaveMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EAC9212BC653790053AD90 /* RaveMacApp.swift */; };
+		22EAC9262BC6537A0053AD90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9252BC6537A0053AD90 /* Assets.xcassets */; };
+		22EAC9292BC6537A0053AD90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9282BC6537A0053AD90 /* Preview Assets.xcassets */; };
+		22EAC92F2BC653C60053AD90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EAC92E2BC653C60053AD90 /* ContentView.swift */; };
+		22EAC94E2BC726560053AD90 /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22EAC94D2BC726560053AD90 /* RavePackages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22BF4FA52BB3C2060042594D /* RaveMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22BF4FA82BB3C2060042594D /* RaveMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaveMacApp.swift; sourceTree = "<group>"; };
-		22BF4FAA2BB3C2060042594D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		22BF4FAC2BB3C2070042594D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22BF4FAF2BB3C2070042594D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		22BF4FB12BB3C2070042594D /* RaveMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaveMac.entitlements; sourceTree = "<group>"; };
+		22EAC91F2BC653790053AD90 /* RaveMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EAC9212BC653790053AD90 /* RaveMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaveMacApp.swift; sourceTree = "<group>"; };
+		22EAC9252BC6537A0053AD90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22EAC9282BC6537A0053AD90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		22EAC92A2BC6537A0053AD90 /* RaveMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaveMac.entitlements; sourceTree = "<group>"; };
+		22EAC92E2BC653C60053AD90 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22BF4FA22BB3C2060042594D /* Frameworks */ = {
+		22EAC91C2BC653790053AD90 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EAC94E2BC726560053AD90 /* RavePackages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,57 +38,68 @@
 		22BF4F9C2BB3C2060042594D = {
 			isa = PBXGroup;
 			children = (
-				22BF4FA72BB3C2060042594D /* RaveMac */,
+				22EAC9202BC653790053AD90 /* RaveMac */,
 				22BF4FA62BB3C2060042594D /* Products */,
+				22EAC93B2BC6589F0053AD90 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		22BF4FA62BB3C2060042594D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22BF4FA52BB3C2060042594D /* RaveMac.app */,
+				22EAC91F2BC653790053AD90 /* RaveMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22BF4FA72BB3C2060042594D /* RaveMac */ = {
+		22EAC9202BC653790053AD90 /* RaveMac */ = {
 			isa = PBXGroup;
 			children = (
-				22BF4FA82BB3C2060042594D /* RaveMacApp.swift */,
-				22BF4FAA2BB3C2060042594D /* ContentView.swift */,
-				22BF4FAC2BB3C2070042594D /* Assets.xcassets */,
-				22BF4FB12BB3C2070042594D /* RaveMac.entitlements */,
-				22BF4FAE2BB3C2070042594D /* Preview Content */,
+				22EAC92E2BC653C60053AD90 /* ContentView.swift */,
+				22EAC9212BC653790053AD90 /* RaveMacApp.swift */,
+				22EAC9252BC6537A0053AD90 /* Assets.xcassets */,
+				22EAC92A2BC6537A0053AD90 /* RaveMac.entitlements */,
+				22EAC9272BC6537A0053AD90 /* Preview Content */,
 			);
 			path = RaveMac;
 			sourceTree = "<group>";
 		};
-		22BF4FAE2BB3C2070042594D /* Preview Content */ = {
+		22EAC9272BC6537A0053AD90 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				22BF4FAF2BB3C2070042594D /* Preview Assets.xcassets */,
+				22EAC9282BC6537A0053AD90 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		22EAC93B2BC6589F0053AD90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22BF4FA42BB3C2060042594D /* RaveMac */ = {
+		22EAC91E2BC653790053AD90 /* RaveMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22BF4FB42BB3C2070042594D /* Build configuration list for PBXNativeTarget "RaveMac" */;
+			buildConfigurationList = 22EAC92B2BC6537A0053AD90 /* Build configuration list for PBXNativeTarget "RaveMac" */;
 			buildPhases = (
-				22BF4FA12BB3C2060042594D /* Sources */,
-				22BF4FA22BB3C2060042594D /* Frameworks */,
-				22BF4FA32BB3C2060042594D /* Resources */,
+				22EAC91B2BC653790053AD90 /* Sources */,
+				22EAC91C2BC653790053AD90 /* Frameworks */,
+				22EAC91D2BC653790053AD90 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = RaveMac;
+			packageProductDependencies = (
+				22EAC94D2BC726560053AD90 /* RavePackages */,
+			);
 			productName = RaveMac;
-			productReference = 22BF4FA52BB3C2060042594D /* RaveMac.app */;
+			productReference = 22EAC91F2BC653790053AD90 /* RaveMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +112,7 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					22BF4FA42BB3C2060042594D = {
+					22EAC91E2BC653790053AD90 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
@@ -113,34 +126,37 @@
 				Base,
 			);
 			mainGroup = 22BF4F9C2BB3C2060042594D;
+			packageReferences = (
+				22EAC94C2BC726560053AD90 /* XCLocalSwiftPackageReference "../RavePackages" */,
+			);
 			productRefGroup = 22BF4FA62BB3C2060042594D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22BF4FA42BB3C2060042594D /* RaveMac */,
+				22EAC91E2BC653790053AD90 /* RaveMac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		22BF4FA32BB3C2060042594D /* Resources */ = {
+		22EAC91D2BC653790053AD90 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BF4FB02BB3C2070042594D /* Preview Assets.xcassets in Resources */,
-				22BF4FAD2BB3C2070042594D /* Assets.xcassets in Resources */,
+				22EAC9292BC6537A0053AD90 /* Preview Assets.xcassets in Resources */,
+				22EAC9262BC6537A0053AD90 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		22BF4FA12BB3C2060042594D /* Sources */ = {
+		22EAC91B2BC653790053AD90 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BF4FAB2BB3C2060042594D /* ContentView.swift in Sources */,
-				22BF4FA92BB3C2060042594D /* RaveMacApp.swift in Sources */,
+				22EAC92F2BC653C60053AD90 /* ContentView.swift in Sources */,
+				22EAC9222BC653790053AD90 /* RaveMacApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +281,7 @@
 			};
 			name = Release;
 		};
-		22BF4FB52BB3C2070042594D /* Debug */ = {
+		22EAC92C2BC6537A0053AD90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -292,7 +308,7 @@
 			};
 			name = Debug;
 		};
-		22BF4FB62BB3C2070042594D /* Release */ = {
+		22EAC92D2BC6537A0053AD90 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -331,16 +347,30 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22BF4FB42BB3C2070042594D /* Build configuration list for PBXNativeTarget "RaveMac" */ = {
+		22EAC92B2BC6537A0053AD90 /* Build configuration list for PBXNativeTarget "RaveMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22BF4FB52BB3C2070042594D /* Debug */,
-				22BF4FB62BB3C2070042594D /* Release */,
+				22EAC92C2BC6537A0053AD90 /* Debug */,
+				22EAC92D2BC6537A0053AD90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		22EAC94C2BC726560053AD90 /* XCLocalSwiftPackageReference "../RavePackages" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../RavePackages;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22EAC94D2BC726560053AD90 /* RavePackages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RavePackages;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 22BF4F9D2BB3C2060042594D /* Project object */;
 }

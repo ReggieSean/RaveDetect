@@ -13,6 +13,10 @@ extension String{
     static let charUUID : String = "7f1dde80-f0f0-487e-a70d-ebd2f34f9fa7"
 }
 
+extension Int{
+    static let adTime : Int = 30
+}
+
 extension CBUUID{
     static let serivceUUID : CBUUID = CBUUID(string: .serivceUUID)
     static let charUUID : CBUUID = CBUUID(string: .charUUID)

@@ -23,7 +23,7 @@ import Combine
 
 
 //Service Class / Partial ViewModel to handle central's blt events and UI events
-@available(macOS 10.15, *)
+@available(macOS 14, *)
 public class CBluetoothCentralVM : NSObject, ObservableObject{
     private var central : CBCentralManager?
     @Published public var connectedPeripherials: [CBPeripheral] = []
@@ -77,7 +77,7 @@ class CBCentral : CBCentralManager{
 }
 
 
-@available(macOS 10.15, *)
+@available(macOS 14, *)
 extension CBluetoothCentralVM : CBCentralManagerDelegate{
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state{
@@ -118,13 +118,14 @@ extension CBluetoothCentralVM : CBCentralManagerDelegate{
 }
 
 //Service Class / Partial ViewModel to handle peripherial's blt events and UI events
-@available(macOS 10.15, *)
+@available(iOS 17,macOS 14, *)
+@available(watchOS, unavailable)
 public class CBluetoothPeripherialVM : NSObject, ObservableObject{
     private var peripheral : CBPeripheralManager?
     @Published public var  connected =  false
     @Published public var  advertising = false
     var  timer : Cancellable?
-    @Published public var timeRemaining : Int = 30
+    @Published public var timeRemaining : Int = Int.adTime
   
     public override init() {
         super.init()
@@ -132,62 +133,79 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
         self.peripheral = CBPeripheralManager(delegate: self, queue: .main)
     }
     
-    public func cancelAdvertising(){
+    private func cancelAdvertising(){
         timer?.cancel()
         advertising = false
         peripheral?.stopAdvertising()
-        timeRemaining = 30
+        timeRemaining = Int.adTime
         resetTimer()
     }
     
     private func resetTimer(){
+        timeRemaining = Int.adTime
         timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
             if(self!.advertising){
-                self!.timeRemaining = ((self!.timeRemaining - 1) + 30) % 30
+                print(self!.timeRemaining)
+                self!.timeRemaining = ((self!.timeRemaining - 1) + Int.adTime) % Int.adTime
                 if(self!.timeRemaining == 0){
                     self!.cancelAdvertising()
                 }
-                print(self!.timeRemaining)
             }
         }
     }
     
-   
+    public func flipAdvertising(){
+        if self.advertising {
+            print("Peri canceled advertising")
+            self.advertising = false
+            resetTimer()
+        }else{
+            print("Peri started advertising")
+            self.advertising = true
+            tryAdvertising()
+        }
+    }
     
-    public func tryAdvertise(){
-        if(peripheral!.state == .poweredOn && !peripheral!.isAdvertising){
+    private func tryAdvertising(){
+        if(peripheral!.state == .poweredOn &&
+            self.advertising){
             print("Trying to advertise")
-            advertising = true
             peripheral?.startAdvertising([CBAdvertisementDataServiceUUIDsKey:CBUUID.serivceUUID])
         }
     }
 }
 
-@available(macOS 10.15, *)
+@available(iOS 17,macOS 14, *)
+@available(watchOS, unavailable)
 extension CBluetoothPeripherialVM : CBPeripheralManagerDelegate{
     public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         switch peripheral.state{
                 
             case .unknown:
-                print("Central update to state unknown")
+                print("Peripherial update to state unknown")
             case .resetting:
-                print("Central update to state resetting")
+                print("Peripherial update to state resetting")
             case .unsupported:
-                print("Central update to state unsupported")
+                print("Peripherial update to state unsupported")
             case .unauthorized:
-                print("Central update to state unauthorized")
+                print("Peripherial update to state unauthorized")
             case .poweredOff:
-                print("Central update to state poweredOff")
+                print("Peripherial update to state poweredOff")
             case .poweredOn:
-                print("Central update to state poweredOn")
+                print("Peripherial update to state poweredOn")
                 
             @unknown default:
-                print("Central update to state default")
+                print("Peripherial update to state default")
         }
     }
     
     public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
         print("\(peripheral.description) started adevertising" )
+    }
+    
+    public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
+        print("Peri Received requests")
+        print(requests)
     }
     
 }
