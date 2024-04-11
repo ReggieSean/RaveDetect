@@ -15,6 +15,7 @@ extension String{
 
 extension Int{
     static let adTime : Int = 30
+    static let scanTime : Int = 60
 }
 
 extension CBUUID{

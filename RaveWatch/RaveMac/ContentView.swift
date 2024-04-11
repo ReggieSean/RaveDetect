@@ -9,15 +9,15 @@ import SwiftUI
 import RavePackages
 
 struct ContentView: View {
-    @StateObject var vm = RavePackages.CBluetoothPeripherialVM()
+    @StateObject var peripheralVM = RavePackages.CBluetoothPeripherialVM()
     
     var body: some View {
         let _ = Self._printChanges()
         VStack {
-            Button(action:{vm.flipAdvertising()}){
-                Text(vm.advertising ? "Stop advertising" : "Start advertising")
+            Button(action:{peripheralVM.flipAdvertising()}){
+                Text(peripheralVM.advertising ? "Stop advertising" : "Start advertising")
             }
-            Text("Time left : \(vm.timeRemaining)")
+            Text("Time left : \(peripheralVM.timeRemaining)")
         }
         .padding()
     }

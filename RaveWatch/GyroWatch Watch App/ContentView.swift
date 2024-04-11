@@ -12,7 +12,7 @@ import RavePackages
 typealias CBVM =  RavePackages.CBluetoothCentralVM
 
 struct ContentView: View {
-    @StateObject var vm = CBVM()
+    @StateObject var centralVm = CBVM()
     let topHeight  = 0.2
     let remain  = 0.8
     let colors = [Color.brown, Color.blue, Color.black ]
@@ -22,9 +22,9 @@ struct ContentView: View {
         VStack{
             GeometryReader{ geo in
                 VStack{
-                    Button(action: {idx = (idx + 1) % 3}, label: {
-                        Text("BLT").font(.footnote)
-                    }).frame(width : 50, height: 40)
+                    Button(action: {centralVm.flipScanning()}, label: {
+                        Text(centralVm.scanning ? "Stop" : "Start").font(.footnote)
+                    }).frame(height: 40)
                     RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)).frame(height: geo.size.height * remain).foregroundColor(colors[idx]).overlay(
                         ScrollView{
                             Form{

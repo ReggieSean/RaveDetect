@@ -28,12 +28,15 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
     private var central : CBCentralManager?
     @Published public var connectedPeripherials: [CBPeripheral] = []
     @Published public var peripherials : [CBPeripheral] = []
-    @Published var  connected =  false
-    @Published var scanning = false
+    @Published public var connected =  false
+    @Published public var scanning = false
+    @Published var timeRemaining = Int.scanTime
+    private var timer : AnyCancellable?
     //private var eventQ :[BltState] =  []
     override public init(){
         super.init()
         self.central = CBCentral(delegate: self, queue: .main)//have to setup self first so CBCentralManager is init after
+        self.resetTimer()
         print("CBCentral finished init")
         print("CBCentral state \(self.central!.state)")
     }
@@ -50,17 +53,56 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
         }
     }
     
-    public func tryScan(){
-        if(central!.state == .poweredOn && !central!.isScanning){
-            print("Trying to scan")
-            scanning = true
-            central!.scanForPeripherals(withServices: [CBUUID.serivceUUID])
-            var runCount = 0
-            Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
-                self?.central!.stopScan()//delete all discovered peripherials
-                self?.scanning = false
-                
+    public func flipScanning(){
+        if(scanning){
+            print("Central cancelled scanning")
+            cancelScanning()
+        }else{
+            print("Central starts scanning")
+            tryScan()
+        }
+        
+    }
+    
+    private func resetTimer(){
+        timer?.cancel()
+        timeRemaining = Int.scanTime
+        timer = Timer.publish(every: 1, on: .main , in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
+            if(self!.scanning){
+                print(self!.timeRemaining)
+                self!.timeRemaining -= 1
+                if(self!.timeRemaining <= 0){
+                    self!.cancelScanning()
+                }
             }
+        }
+    }
+//    private func resetTimer(){
+//        timer?.cancel()
+//        timeRemaining = Int.adTime
+//        timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
+//            if(self!.advertising){
+//                print(self!.timeRemaining)
+//                self!.timeRemaining -= 1
+//                if(self!.timeRemaining <= 0){
+//                    self!.cancelAdvertising()
+//                }
+//            }
+//        }
+//    }
+    
+    private func cancelScanning(){
+        timer?.cancel()
+        scanning = false
+        central?.stopScan()
+        resetTimer()
+    }
+    
+    public func tryScan(){
+        if(central!.state == .poweredOn ){
+            self.scanning = true
+            print("Trying to scan")
+            central!.scanForPeripherals(withServices: [CBUUID.serivceUUID], options: nil)
         }
     }
     
@@ -72,7 +114,7 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
 //CBCentralManager use for CBUUID:(...) service
 class CBCentral : CBCentralManager{
     init(delegate : CBCentralManagerDelegate, queue : DispatchQueue){
-        super.init(delegate: delegate , queue: queue,options: [:])
+        super.init(delegate: delegate , queue: queue,options: nil)
     }
 }
 
@@ -94,7 +136,6 @@ extension CBluetoothCentralVM : CBCentralManagerDelegate{
                 print("Central update to state poweredOff")
             case .poweredOn:
                 print("Central update to state poweredOn")
-                tryScan()
             @unknown default:
                 print("Central update to state default")
         }
@@ -115,64 +156,6 @@ extension CBluetoothCentralVM : CBCentralManagerDelegate{
         //Timer to disconnect after action
     }
     
-}
-
-//Service Class / Partial ViewModel to handle peripherial's blt events and UI events
-@available(iOS 17,macOS 14, *)
-@available(watchOS, unavailable)
-public class CBluetoothPeripherialVM : NSObject, ObservableObject{
-    private var peripheral : CBPeripheralManager?
-    @Published public var  connected =  false
-    @Published public var  advertising = false
-    var  timer : Cancellable?
-    @Published public var timeRemaining : Int = Int.adTime
-  
-    public override init() {
-        super.init()
-        resetTimer()
-        self.peripheral = CBPeripheralManager(delegate: self, queue: .main)
-    }
-    
-    private func cancelAdvertising(){
-        timer?.cancel()
-        advertising = false
-        peripheral?.stopAdvertising()
-        timeRemaining = Int.adTime
-        resetTimer()
-    }
-    
-    private func resetTimer(){
-        timeRemaining = Int.adTime
-        timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
-            if(self!.advertising){
-                print(self!.timeRemaining)
-                self!.timeRemaining = ((self!.timeRemaining - 1) + Int.adTime) % Int.adTime
-                if(self!.timeRemaining == 0){
-                    self!.cancelAdvertising()
-                }
-            }
-        }
-    }
-    
-    public func flipAdvertising(){
-        if self.advertising {
-            print("Peri canceled advertising")
-            self.advertising = false
-            resetTimer()
-        }else{
-            print("Peri started advertising")
-            self.advertising = true
-            tryAdvertising()
-        }
-    }
-    
-    private func tryAdvertising(){
-        if(peripheral!.state == .poweredOn &&
-            self.advertising){
-            print("Trying to advertise")
-            peripheral?.startAdvertising([CBAdvertisementDataServiceUUIDsKey:CBUUID.serivceUUID])
-        }
-    }
 }
 
 @available(iOS 17,macOS 14, *)
@@ -209,6 +192,65 @@ extension CBluetoothPeripherialVM : CBPeripheralManagerDelegate{
     }
     
 }
+
+//Service Class / Partial ViewModel to handle peripherial's blt events and UI events
+@available(iOS 17,macOS 14, *)
+@available(watchOS, unavailable)//at the time being watchOS does not support Peripherial mode
+public class CBluetoothPeripherialVM : NSObject, ObservableObject{
+    private var peripheral : CBPeripheralManager?
+    @Published public var  connected =  false
+    @Published public var  advertising = false
+    var  timer : Cancellable?
+    @Published public var timeRemaining : Int = Int.adTime
+  
+    public override init() {
+        super.init()
+        resetTimer()
+        self.peripheral = CBPeripheralManager(delegate: self, queue: .main)
+    }
+    
+    private func cancelAdvertising(){
+        timer?.cancel()
+        advertising = false
+        peripheral?.stopAdvertising()
+        resetTimer()
+    }
+    
+    private func resetTimer(){
+        timer?.cancel()
+        timeRemaining = Int.adTime
+        timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
+            if(self!.advertising){
+                print(self!.timeRemaining)
+                self!.timeRemaining -= 1
+                if(self!.timeRemaining <= 0){
+                    self!.cancelAdvertising()
+                }
+            }
+        }
+    }
+    
+    public func flipAdvertising(){
+        if self.advertising {
+            print("Peri canceled advertising")
+            cancelAdvertising()
+        }else{
+            print("Peri started advertising")
+            tryAdvertising()
+        }
+    }
+    
+    private func tryAdvertising(){
+        self.advertising = true
+        if(peripheral!.state == .poweredOn){
+            print("Trying to advertise")
+            peripheral?.startAdvertising([CBAdvertisementDataServiceUUIDsKey:CBUUID.serivceUUID])
+            print(peripheral?.value(forKey: .serivceUUID) ?? "null")
+        }
+}
+}
+
+
 
 
 
