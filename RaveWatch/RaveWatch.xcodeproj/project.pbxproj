@@ -14,6 +14,11 @@
 		2227F9742BC0E9E700E03E8F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2227F9732BC0E9E700E03E8F /* Preview Assets.xcassets */; };
 		2227F97E2BC0EB6000E03E8F /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 2227F97D2BC0EB6000E03E8F /* RavePackages */; };
 		2251376B2BC09A3400131A57 /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 2251376A2BC09A3400131A57 /* RavePackages */; };
+		22EAC9562BC88E640053AD90 /* RavePhoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EAC9552BC88E640053AD90 /* RavePhoneApp.swift */; };
+		22EAC9582BC88E640053AD90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EAC9572BC88E640053AD90 /* ContentView.swift */; };
+		22EAC95A2BC88E650053AD90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9592BC88E650053AD90 /* Assets.xcassets */; };
+		22EAC95D2BC88E650053AD90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC95C2BC88E650053AD90 /* Preview Assets.xcassets */; };
+		22EAC9622BC88EC00053AD90 /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22EAC9612BC88EC00053AD90 /* RavePackages */; };
 		22F8D39F2BB3CA4800C468CA /* RaveWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22F8D39E2BB3CA4800C468CA /* RaveWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22F8D3A42BB3CA4800C468CA /* RaveWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3A32BB3CA4800C468CA /* RaveWatchApp.swift */; };
 		22F8D3A62BB3CA4800C468CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F8D3A52BB3CA4800C468CA /* ContentView.swift */; };
@@ -102,6 +107,12 @@
 		2227F9732BC0E9E700E03E8F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2227F97C2BC0EAB100E03E8F /* ColorWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ColorWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		22EAC9072BC651620053AD90 /* RaveMacDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaveMacDebug.entitlements; sourceTree = "<group>"; };
+		22EAC9532BC88E630053AD90 /* RavePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RavePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EAC9552BC88E640053AD90 /* RavePhoneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavePhoneApp.swift; sourceTree = "<group>"; };
+		22EAC9572BC88E640053AD90 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		22EAC9592BC88E650053AD90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22EAC95C2BC88E650053AD90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		22EAC9632BC88F5E0053AD90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		22F8D3982BB3CA4800C468CA /* RaveWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F8D39E2BB3CA4800C468CA /* RaveWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RaveWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F8D3A32BB3CA4800C468CA /* RaveWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaveWatchApp.swift; sourceTree = "<group>"; };
@@ -129,6 +140,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2227F97E2BC0EB6000E03E8F /* RavePackages in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22EAC9502BC88E630053AD90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22EAC9622BC88EC00053AD90 /* RavePackages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +198,26 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		22EAC9542BC88E640053AD90 /* RavePhone */ = {
+			isa = PBXGroup;
+			children = (
+				22EAC9632BC88F5E0053AD90 /* Info.plist */,
+				22EAC9552BC88E640053AD90 /* RavePhoneApp.swift */,
+				22EAC9572BC88E640053AD90 /* ContentView.swift */,
+				22EAC9592BC88E650053AD90 /* Assets.xcassets */,
+				22EAC95B2BC88E650053AD90 /* Preview Content */,
+			);
+			path = RavePhone;
+			sourceTree = "<group>";
+		};
+		22EAC95B2BC88E650053AD90 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				22EAC95C2BC88E650053AD90 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		22F8D3912BB3CA4800C468CA = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +226,7 @@
 				22F8D3BC2BB508DD00C468CA /* RaveMac */,
 				22F8D3D52BB5094700C468CA /* GyroWatch Watch App */,
 				2227F96B2BC0E9E600E03E8F /* ColorWatch Watch App */,
+				22EAC9542BC88E640053AD90 /* RavePhone */,
 				22F8D3992BB3CA4800C468CA /* Products */,
 				22F8D3E62BB5F39800C468CA /* Frameworks */,
 			);
@@ -202,6 +242,7 @@
 				22F8D3D12BB5094700C468CA /* GyroWatch Watch App.app */,
 				2227F9622BC0E9E500E03E8F /* ColorWatch.app */,
 				2227F9672BC0E9E600E03E8F /* ColorWatch Watch App.app */,
+				22EAC9532BC88E630053AD90 /* RavePhone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -311,6 +352,26 @@
 			);
 			productName = "ColorWatch Watch App";
 			productReference = 2227F9672BC0E9E600E03E8F /* ColorWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22EAC9522BC88E630053AD90 /* RavePhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22EAC95E2BC88E650053AD90 /* Build configuration list for PBXNativeTarget "RavePhone" */;
+			buildPhases = (
+				22EAC94F2BC88E630053AD90 /* Sources */,
+				22EAC9502BC88E630053AD90 /* Frameworks */,
+				22EAC9512BC88E630053AD90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RavePhone;
+			packageProductDependencies = (
+				22EAC9612BC88EC00053AD90 /* RavePackages */,
+			);
+			productName = RavePhone;
+			productReference = 22EAC9532BC88E630053AD90 /* RavePhone.app */;
 			productType = "com.apple.product-type.application";
 		};
 		22F8D3972BB3CA4800C468CA /* RaveWatch */ = {
@@ -423,6 +484,9 @@
 					2227F9662BC0E9E600E03E8F = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
+					22EAC9522BC88E630053AD90 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					22F8D3972BB3CA4800C468CA = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -460,6 +524,7 @@
 				22F8D3D02BB5094700C468CA /* GyroWatch Watch App */,
 				2227F9612BC0E9E500E03E8F /* ColorWatch */,
 				2227F9662BC0E9E600E03E8F /* ColorWatch Watch App */,
+				22EAC9522BC88E630053AD90 /* RavePhone */,
 			);
 		};
 /* End PBXProject section */
@@ -478,6 +543,15 @@
 			files = (
 				2227F9742BC0E9E700E03E8F /* Preview Assets.xcassets in Resources */,
 				2227F9712BC0E9E700E03E8F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22EAC9512BC88E630053AD90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22EAC95D2BC88E650053AD90 /* Preview Assets.xcassets in Resources */,
+				22EAC95A2BC88E650053AD90 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +605,15 @@
 			files = (
 				2227F96F2BC0E9E600E03E8F /* ContentView.swift in Sources */,
 				2227F96D2BC0E9E600E03E8F /* ColorWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22EAC94F2BC88E630053AD90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22EAC9582BC88E640053AD90 /* ContentView.swift in Sources */,
+				22EAC9562BC88E640053AD90 /* RavePhoneApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +759,75 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22EAC95F2BC88E650053AD90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RavePhone/Preview Content\"";
+				DEVELOPMENT_TEAM = J3JH7QQGHX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RavePhone/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "We need bluetooth on the phone for peripheral";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Sean.RavePhone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22EAC9602BC88E650053AD90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RavePhone/Preview Content\"";
+				DEVELOPMENT_TEAM = J3JH7QQGHX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RavePhone/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "We need bluetooth on the phone for peripheral";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Sean.RavePhone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1075,6 +1227,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		22EAC95E2BC88E650053AD90 /* Build configuration list for PBXNativeTarget "RavePhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22EAC95F2BC88E650053AD90 /* Debug */,
+				22EAC9602BC88E650053AD90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22F8D3952BB3CA4800C468CA /* Build configuration list for PBXProject "RaveWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1137,6 +1298,10 @@
 			productName = RavePackages;
 		};
 		2251376A2BC09A3400131A57 /* RavePackages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RavePackages;
+		};
+		22EAC9612BC88EC00053AD90 /* RavePackages */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RavePackages;
 		};

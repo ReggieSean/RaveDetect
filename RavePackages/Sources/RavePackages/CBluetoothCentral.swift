@@ -2,9 +2,8 @@
 //  File.swift
 //  
 //
-//  Created by SeanHuang on 3/26/24.
+//  Created by SeanHuang on 4/12/24.
 //
-
 import CoreBluetooth
 import Foundation
 import Combine
@@ -99,14 +98,13 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
     }
     
     public func tryScan(){
-        if(central!.state == .poweredOn ){
+        if(central!.state == .poweredOn){
             self.scanning = true
             print("Trying to scan")
-            central!.scanForPeripherals(withServices: [CBUUID.serivceUUID], options: nil)
+            central!.scanForPeripherals(withServices: [CBUUID.serivceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+//            central!.scanForPeripherals(withServices: nil)
         }
     }
-    
-    
 }
 
 
@@ -157,100 +155,3 @@ extension CBluetoothCentralVM : CBCentralManagerDelegate{
     }
     
 }
-
-@available(iOS 17,macOS 14, *)
-@available(watchOS, unavailable)
-extension CBluetoothPeripherialVM : CBPeripheralManagerDelegate{
-    public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        switch peripheral.state{
-                
-            case .unknown:
-                print("Peripherial update to state unknown")
-            case .resetting:
-                print("Peripherial update to state resetting")
-            case .unsupported:
-                print("Peripherial update to state unsupported")
-            case .unauthorized:
-                print("Peripherial update to state unauthorized")
-            case .poweredOff:
-                print("Peripherial update to state poweredOff")
-            case .poweredOn:
-                print("Peripherial update to state poweredOn")
-                
-            @unknown default:
-                print("Peripherial update to state default")
-        }
-    }
-    
-    public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        print("\(peripheral.description) started adevertising" )
-    }
-    
-    public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        print("Peri Received requests")
-        print(requests)
-    }
-    
-}
-
-//Service Class / Partial ViewModel to handle peripherial's blt events and UI events
-@available(iOS 17,macOS 14, *)
-@available(watchOS, unavailable)//at the time being watchOS does not support Peripherial mode
-public class CBluetoothPeripherialVM : NSObject, ObservableObject{
-    private var peripheral : CBPeripheralManager?
-    @Published public var  connected =  false
-    @Published public var  advertising = false
-    var  timer : Cancellable?
-    @Published public var timeRemaining : Int = Int.adTime
-  
-    public override init() {
-        super.init()
-        resetTimer()
-        self.peripheral = CBPeripheralManager(delegate: self, queue: .main)
-    }
-    
-    private func cancelAdvertising(){
-        timer?.cancel()
-        advertising = false
-        peripheral?.stopAdvertising()
-        resetTimer()
-    }
-    
-    private func resetTimer(){
-        timer?.cancel()
-        timeRemaining = Int.adTime
-        timer = Timer.publish(every:1, on: .main, in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
-            if(self!.advertising){
-                print(self!.timeRemaining)
-                self!.timeRemaining -= 1
-                if(self!.timeRemaining <= 0){
-                    self!.cancelAdvertising()
-                }
-            }
-        }
-    }
-    
-    public func flipAdvertising(){
-        if self.advertising {
-            print("Peri canceled advertising")
-            cancelAdvertising()
-        }else{
-            print("Peri started advertising")
-            tryAdvertising()
-        }
-    }
-    
-    private func tryAdvertising(){
-        self.advertising = true
-        if(peripheral!.state == .poweredOn){
-            print("Trying to advertise")
-            peripheral?.startAdvertising([CBAdvertisementDataServiceUUIDsKey:CBUUID.serivceUUID])
-            print(peripheral?.value(forKey: .serivceUUID) ?? "null")
-        }
-}
-}
-
-
-
-
-
