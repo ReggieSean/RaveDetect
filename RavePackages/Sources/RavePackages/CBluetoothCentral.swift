@@ -30,8 +30,12 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
     @Published public var connected =  false
     @Published public var scanning = false
     @Published var timeRemaining = Int.scanTime
-    private var timer : AnyCancellable?
+    //Cancellable .cancel will eliminate/deinit to null.
+    private var discoverTimer : AnyCancellable?
+    private var connectTimer : AnyCancellable?
+    
     //private var eventQ :[BltState] =  []
+    
     override public init(){
         super.init()
         self.central = CBCentral(delegate: self, queue: .main)//have to setup self first so CBCentralManager is init after
@@ -58,15 +62,16 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
             cancelScanning()
         }else{
             print("Central starts scanning")
+            self.peripherials = []
             tryScan()
         }
         
     }
     
     private func resetTimer(){
-        timer?.cancel()
+        discoverTimer?.cancel()
         timeRemaining = Int.scanTime
-        timer = Timer.publish(every: 1, on: .main , in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
+        discoverTimer = Timer.publish(every: 1, on: .main , in: .common).autoconnect().receive(on: DispatchQueue.main).sink{[weak self]_ in
             if(self!.scanning){
                 print(self!.timeRemaining)
                 self!.timeRemaining -= 1
@@ -91,7 +96,7 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
 //    }
     
     private func cancelScanning(){
-        timer?.cancel()
+        discoverTimer?.cancel()
         scanning = false
         central?.stopScan()
         resetTimer()
@@ -102,10 +107,20 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
             self.scanning = true
             print("Trying to scan")
             central!.scanForPeripherals(withServices: [CBUUID.serivceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-//            central!.scanForPeripherals(withServices: nil)
         }
     }
+    
+    public func onPeripheralClicked(Peripheral per : CBPeripheral){
+        if let central = central{
+            central.connect(per);
+            self.connectTimer = Timer.publish(every: 1, on: .main, in: .common).receive(on: DispatchQueue.main).sink(receiveValue: {[weak self]_ in
+            })
+        }
+        
+    }
+    
 }
+
 
 
 //Inherieted to implemnt timers

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22DD79DF2BCE3C9B0004C431 /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22DD79DE2BCE3C9B0004C431 /* RavePackages */; };
 		22EAC9222BC653790053AD90 /* RaveMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EAC9212BC653790053AD90 /* RaveMacApp.swift */; };
 		22EAC9262BC6537A0053AD90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9252BC6537A0053AD90 /* Assets.xcassets */; };
 		22EAC9292BC6537A0053AD90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9282BC6537A0053AD90 /* Preview Assets.xcassets */; };
@@ -29,6 +30,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22EAC94E2BC726560053AD90 /* RavePackages in Frameworks */,
+				22DD79DF2BCE3C9B0004C431 /* RavePackages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +99,7 @@
 			name = RaveMac;
 			packageProductDependencies = (
 				22EAC94D2BC726560053AD90 /* RavePackages */,
+				22DD79DE2BCE3C9B0004C431 /* RavePackages */,
 			);
 			productName = RaveMac;
 			productReference = 22EAC91F2BC653790053AD90 /* RaveMac.app */;
@@ -366,6 +369,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		22DD79DE2BCE3C9B0004C431 /* RavePackages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RavePackages;
+		};
 		22EAC94D2BC726560053AD90 /* RavePackages */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RavePackages;

@@ -53,8 +53,6 @@ extension CBluetoothPeripherialVM : CBPeripheralManagerDelegate{
         }
     }
     
-    
-    
     public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         print("Peri Received requests")
         print(requests)

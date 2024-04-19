@@ -18,6 +18,7 @@ struct ContentView: View {
                 Text(peripheralVM.advertising ? "Stop advertising" : "Start advertising")
             }
             Text("Time left : \(peripheralVM.timeRemaining)")
+            
         }
         .padding()
     }
