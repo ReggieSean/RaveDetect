@@ -13,12 +13,11 @@ struct ContentView: View {
     
     var body: some View {
         let _ = Self._printChanges()
+       //if connected  go to print window
         VStack {
             Button(action:{peripheralVM.flipAdvertising()}){
                 Text(peripheralVM.advertising ? "Stop advertising" : "Start advertising")
             }
-            Text("Time left : \(peripheralVM.timeRemaining)")
-            
         }
         .padding()
     }
