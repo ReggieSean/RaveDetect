@@ -49,24 +49,46 @@ extension CBluetoothPeripherialVM : CBPeripheralManagerDelegate{
     public func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
         print("\(peripheral.description) started adevertising")
         if let err = error {
-            print("Peripheral encountered error: ",err.localizedDescription)
+            print("Peripheral advertising error: ",err.localizedDescription)
         }
     }
-    
-    public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        print("Peri Received requests")
-        print(requests)
+    private func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+        print("Central \(central) connected and subscribed to characteristic \(characteristic.uuid)")
+        // Handle the central's connection, e.g., prepare data to send
     }
     
+   
+//     CBPeripheralManagerDelegate method to handle central connections
+
+    public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
+            for request in requests {
+                print(request.characteristic)
+                if request.characteristic == CBUUID.ultra2{
+                    // Handle the incoming data
+                    if let data = request.value {
+                        print("Received data from central: \(data)")
+                        // Process the data as needed
+                        // Respond to the write request
+                        peripheral.respond(to: request, withResult: .success)
+                    } else {
+                        // Respond with an error if the data is not valid
+                        peripheral.respond(to: request, withResult: .invalidAttributeValueLength)
+                    }
+                }
+            }
+        }
+
 }
 
 //Service Class / Partial ViewModel to handle peripherial's blt events and UI events
 @available(iOS 17,macOS 14, *)
 @available(watchOS, unavailable)//at the time being watchOS does not support Peripherial mode
 public class CBluetoothPeripherialVM : NSObject, ObservableObject{
-    private var peripheral : CBPeripheralManager?
+    private var peripheral : CBPeripheralManager!
+    @Published public var textOnScreen = "This is a joke"
     @Published public var  connected =  false
     @Published public var  advertising = false
+    
     var  timer : Cancellable?
     @Published public var timeRemaining : Int = Int.adTime
   
@@ -79,7 +101,7 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
     private func cancelAdvertising(){
         timer?.cancel()
         advertising = false
-        peripheral?.stopAdvertising()
+        peripheral.stopAdvertising()
         resetTimer()
     }
     
@@ -108,19 +130,18 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
     }
     
     private func tryAdvertising(){
-        if(peripheral!.state == .poweredOn){
+        if(peripheral.state == .poweredOn){
             self.advertising = true
             
             let advertisingData: [String: Any] = [
                 CBAdvertisementDataServiceUUIDsKey: [CBUUID.serivceUUID],
                 CBAdvertisementDataLocalNameKey: "Rave Peripheral"
             ]
-            peripheral?.startAdvertising(advertisingData)
+            peripheral.startAdvertising(advertisingData)
             //print(peripheral?.value(forKey: .serivceUUID) ?? "null")
         }
     }
 }
-
 
 
 

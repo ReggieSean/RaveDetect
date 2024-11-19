@@ -18,10 +18,11 @@ struct ContentView: View {
     let colors = [Color.brown, Color.blue, Color.black]
     @State var idx = 0
     var body: some View {
-        let _ = Self._printChanges()
+        ///let _ = Self._printChanges()
         VStack{
             GeometryReader{ geo in
                 VStack{
+                    Text(centralVm.gyroData)
                     Button(action: {centralVm.flipScanning()}, label: {
                         Text(centralVm.scanning ? "Stop" : "Start").font(.footnote)
                     }).frame(height: 40)

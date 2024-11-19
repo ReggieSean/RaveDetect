@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import RaveLibrary
 
-class IPC {
+class IPCManager {
     
 }

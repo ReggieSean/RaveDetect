@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2216BF992C93E9CF001FE107 /* RavePackages in Resources */ = {isa = PBXBuildFile; fileRef = 2216BF982C93E9CF001FE107 /* RavePackages */; };
+		229802AA2CE5160E0098ECFE /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 229802A92CE5160E0098ECFE /* RavePackages */; };
+		229802AD2CE516240098ECFE /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 229802AC2CE516240098ECFE /* RavePackages */; };
+		22B2A6C42CE9158800A61942 /* RaveLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 22B2A6C32CE9158800A61942 /* RaveLibrary */; };
+		22B2A6C62CE9158800A61942 /* RavePackages in Frameworks */ = {isa = PBXBuildFile; productRef = 22B2A6C52CE9158800A61942 /* RavePackages */; };
 		22EAC9222BC653790053AD90 /* RaveMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EAC9212BC653790053AD90 /* RaveMacApp.swift */; };
 		22EAC9262BC6537A0053AD90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9252BC6537A0053AD90 /* Assets.xcassets */; };
 		22EAC9292BC6537A0053AD90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EAC9282BC6537A0053AD90 /* Preview Assets.xcassets */; };
@@ -15,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		220A55622CE5245500CA750B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2216BF982C93E9CF001FE107 /* RavePackages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RavePackages; path = ../RavePackages; sourceTree = "<group>"; };
 		22EAC91F2BC653790053AD90 /* RaveMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EAC9212BC653790053AD90 /* RaveMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaveMacApp.swift; sourceTree = "<group>"; };
@@ -29,6 +34,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B2A6C42CE9158800A61942 /* RaveLibrary in Frameworks */,
+				22B2A6C62CE9158800A61942 /* RavePackages in Frameworks */,
+				229802AA2CE5160E0098ECFE /* RavePackages in Frameworks */,
+				229802AD2CE516240098ECFE /* RavePackages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +65,7 @@
 		22EAC9202BC653790053AD90 /* RaveMac */ = {
 			isa = PBXGroup;
 			children = (
+				220A55622CE5245500CA750B /* Info.plist */,
 				22EAC92E2BC653C60053AD90 /* ContentView.swift */,
 				22EAC9212BC653790053AD90 /* RaveMacApp.swift */,
 				22EAC9252BC6537A0053AD90 /* Assets.xcassets */,
@@ -97,6 +107,10 @@
 			);
 			name = RaveMac;
 			packageProductDependencies = (
+				229802A92CE5160E0098ECFE /* RavePackages */,
+				229802AC2CE516240098ECFE /* RavePackages */,
+				22B2A6C32CE9158800A61942 /* RaveLibrary */,
+				22B2A6C52CE9158800A61942 /* RavePackages */,
 			);
 			productName = RaveMac;
 			productReference = 22EAC91F2BC653790053AD90 /* RaveMac.app */;
@@ -127,6 +141,7 @@
 			);
 			mainGroup = 22BF4F9C2BB3C2060042594D;
 			packageReferences = (
+				22B2A6C22CE9158800A61942 /* XCLocalSwiftPackageReference "../RavePackages" */,
 			);
 			productRefGroup = 22BF4FA62BB3C2060042594D /* Products */;
 			projectDirPath = "";
@@ -198,6 +213,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -222,7 +238,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -261,6 +279,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -278,6 +297,8 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -287,14 +308,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RaveMac/RaveMac.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"RaveMac/Preview Content\"";
 				DEVELOPMENT_TEAM = J3JH7QQGHX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RaveMac/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "NeedBluetooth to connect to your sensor";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -304,7 +329,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Sean.RaveMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -314,14 +340,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RaveMac/RaveMac.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RaveMac/Preview Content\"";
 				DEVELOPMENT_TEAM = J3JH7QQGHX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RaveMac/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "NeedBluetooth to connect to your sensor";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -331,7 +361,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Sean.RaveMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -357,6 +388,32 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		22B2A6C22CE9158800A61942 /* XCLocalSwiftPackageReference "../RavePackages" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../RavePackages;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		229802A92CE5160E0098ECFE /* RavePackages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RavePackages;
+		};
+		229802AC2CE516240098ECFE /* RavePackages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RavePackages;
+		};
+		22B2A6C32CE9158800A61942 /* RaveLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RaveLibrary;
+		};
+		22B2A6C52CE9158800A61942 /* RavePackages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RavePackages;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 22BF4F9D2BB3C2060042594D /* Project object */;
 }
