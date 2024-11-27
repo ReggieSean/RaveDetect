@@ -26,8 +26,6 @@ import CoreMotion
 @available(macOS 14, *)
 public class CBluetoothCentralVM : NSObject, ObservableObject{
         
-   
-    
     private var central : CBCentralManager?
     @Published public var connectedPeripherials: [CBPeripheral] = []
     @Published public var peripherials : [CBPeripheral] = []
@@ -37,6 +35,7 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
     @Published public var scanning = false
     @Published var timeRemaining = Int.scanTime
     @Published public var gyroData = ""
+    var musicReceiver =  MusicReceiver()
     //Cancellable .cancel will eliminate/deinit to null.
     private var discoverTimer : AnyCancellable?
     private var connectTimer : AnyCancellable?
@@ -57,22 +56,15 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
         print("CBCentral finished init")
         print("CBCentral state \(self.central!.state)")
         central = CBCentralManager(delegate: self, queue: .main)
-        
-        #if !os(macOS)
-            setupMotionUpdates()
-        #endif
-        
     }
     
    
  
-
-
-    
     
     func connectPeripherial(Index idx : Int){
         print("try connecting peripherial:\(idx) \(peripherials[idx].name!)")
         self.central!.connect(peripherials[idx])
+        
         Timer.scheduledTimer(withTimeInterval: 30, repeats: false){[weak self] timer in
             if !(self!.connected){
                 self!.central!.cancelPeripheralConnection((self?.peripherials[idx])!)
@@ -117,7 +109,7 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
         if(central!.state == .poweredOn){
             self.scanning = true
             print("Trying to scan")
-            central!.scanForPeripherals(withServices: [CBUUID.serivceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+            central!.scanForPeripherals(withServices: [CBUUID.serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         }
     }
     
@@ -125,9 +117,7 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
         if central!.state == .poweredOn {
             central!.connect(per);
             print("Attempting to connect to peripheral: \(per)")
-            self.connectTimer = Timer.publish(every: 1, on: .main, in: .common).receive(on: DispatchQueue.main).sink(receiveValue: {[weak self]_ in
-                
-            })
+            
         }
         
     }
@@ -135,7 +125,107 @@ public class CBluetoothCentralVM : NSObject, ObservableObject{
 }
 
 extension CBluetoothCentralVM{
-#if !os(macOS)
+
+    
+}
+
+
+//Inherieted to implemnt timers
+//CBCentralManager use for CBUUID:(...) service
+class CBCentral : CBCentralManager{
+    init(delegate : CBCentralManagerDelegate, queue : DispatchQueue){
+        super.init(delegate: delegate , queue: queue,options: nil)
+    }
+}
+
+// data
+extension CBluetoothCentralVM{
+       func encodeBatch(dataPoints: [(Double, Double, Double)]) -> Data {
+        var data = Data()
+        
+        for (x, y, z) in dataPoints {
+            // Convert to Float
+            var xFloat = Float(x)
+            var yFloat = Float(y)
+            var zFloat = Float(z)
+            
+            // Append to Data
+            data.append(UnsafeBufferPointer(start: &xFloat, count: 1))
+            data.append(UnsafeBufferPointer(start: &yFloat, count: 1))
+            data.append(UnsafeBufferPointer(start: &zFloat, count: 1))
+        }
+        
+        return data
+    }
+    
+    func sendDataInChunks(data: Data, for characteristic: CBCharacteristic) {
+        let mtu = peripherials[0].maximumWriteValueLength(for: .withoutResponse)
+        var offset = 0
+
+        while offset < data.count {
+            let chunkSize = min(mtu, data.count - offset)
+            let chunk = data.subdata(in: offset..<(offset + chunkSize))
+            //print("sent \(chunk)")
+            
+            // Send the chunk
+            if let peripheral = connectedPeripheral{
+                peripheral.writeValue(chunk, for: characteristic, type: .withResponse)
+                offset += chunkSize
+            }
+        }
+    }
+}
+
+
+@available(macOS 14, *)
+extension CBluetoothCentralVM : CBCentralManagerDelegate{
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state{
+                
+            case .unknown:
+                print("Central update to state unknown")
+            case .resetting:
+                print("Central update to state resetting")
+            case .unsupported:
+                print("Central update to state unsupported")
+            case .unauthorized:
+                print("Central update to state unauthorized")
+            case .poweredOff:
+                print("Central update to state poweredOff")
+            case .poweredOn:
+                print("Central update to state poweredOn")
+            @unknown default:
+                print("Central update to state default")
+        }
+        
+    }
+    
+    
+   public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if !peripherials.contains(peripheral){
+            self.peripherials.append(peripheral)
+            print("Discovered peripheral: \(peripheral)")
+        }
+    }
+    
+    //Good for debug
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("Failed to connect to peripheral: \(peripheral) \n error: \(error?.localizedDescription ?? "")")
+        
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("connected and trying to discover services for:\(peripheral)")
+        self.connected = true
+        peripheral.delegate = self
+        connectedPeripheral = peripheral
+        connectedPeripheral?.discoverServices(nil)  // Passing nil discovers all services
+        #if !os(macOS)
+        setupMotionUpdates()
+        #endif
+        //Timer to disconnect after action
+    }
+    #if !os(macOS)
 
     func setupMotionUpdates() {
         motionManager  = CMMotionManager()
@@ -184,98 +274,6 @@ extension CBluetoothCentralVM{
     
 #endif
 
-    
-}
-
-
-//Inherieted to implemnt timers
-//CBCentralManager use for CBUUID:(...) service
-class CBCentral : CBCentralManager{
-    init(delegate : CBCentralManagerDelegate, queue : DispatchQueue){
-        super.init(delegate: delegate , queue: queue,options: nil)
-    }
-}
-
-// data
-extension CBluetoothCentralVM{
-       func encodeBatch(dataPoints: [(Double, Double, Double)]) -> Data {
-        var data = Data()
-        
-        for (x, y, z) in dataPoints {
-            // Convert to Float
-            var xFloat = Float(x)
-            var yFloat = Float(y)
-            var zFloat = Float(z)
-            
-            // Append to Data
-            data.append(UnsafeBufferPointer(start: &xFloat, count: 1))
-            data.append(UnsafeBufferPointer(start: &yFloat, count: 1))
-            data.append(UnsafeBufferPointer(start: &zFloat, count: 1))
-        }
-        
-        return data
-    }
-    
-    func sendDataInChunks(data: Data, for characteristic: CBCharacteristic) {
-        let mtu = peripherials[0].maximumWriteValueLength(for: .withoutResponse)
-        var offset = 0
-
-        while offset < data.count {
-            let chunkSize = min(mtu, data.count - offset)
-            let chunk = data.subdata(in: offset..<(offset + chunkSize))
-            print("sent \(chunk)")
-            
-            // Send the chunk
-            if let peripheral = connectedPeripheral{
-                peripheral.writeValue(chunk, for: characteristic, type: .withResponse)
-            }
-            offset += chunkSize
-        }
-    }
-}
-
-
-@available(macOS 14, *)
-extension CBluetoothCentralVM : CBCentralManagerDelegate{
-    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state{
-                
-            case .unknown:
-                print("Central update to state unknown")
-            case .resetting:
-                print("Central update to state resetting")
-            case .unsupported:
-                print("Central update to state unsupported")
-            case .unauthorized:
-                print("Central update to state unauthorized")
-            case .poweredOff:
-                print("Central update to state poweredOff")
-            case .poweredOn:
-                print("Central update to state poweredOn")
-            @unknown default:
-                print("Central update to state default")
-        }
-        
-    }
-    
-    
-   public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if !peripherials.contains(peripheral){
-            self.peripherials.append(peripheral)
-            print("Discovered peripheral: \(peripheral)")
-        }
-    }
-    
-    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("connected and trying to discover services for:\(peripheral)")
-        self.connected = true
-        peripheral.delegate = self
-        connectedPeripheral = peripheral
-        connectedPeripheral?.discoverServices(nil)  // Passing nil discovers all services
-
-
-        //Timer to disconnect after action
-    }
     
 }
 

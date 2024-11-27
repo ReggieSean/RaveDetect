@@ -121,7 +121,7 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
     
     public func flipAdvertising(){
         if self.advertising {
-            print("Peri canceled advertising")
+            print("Peri: \(self.peripheral.description) canceled advertising")
             cancelAdvertising()
         }else{
             print("Peri started advertising")
@@ -132,12 +132,33 @@ public class CBluetoothPeripherialVM : NSObject, ObservableObject{
     private func tryAdvertising(){
         if(peripheral.state == .poweredOn){
             self.advertising = true
+            let writableCharacteristic = CBMutableCharacteristic(
+                            type: CBUUID.serviceUUID,
+                            properties: [.write, .writeWithoutResponse], // Writable properties
+                            value: nil, // No initial value
+                            permissions: [.writeable] // Permissions to allow writing
+                        
+            )
+                        // Create a service and add the characteristic to it
+            let service = CBMutableService(type: CBUUID.serviceUUID, primary: true)
+            service.characteristics = [writableCharacteristic]
+// advertising mutable service that can be written to instead of jsut a dummy
+//            peripheral.add(service)
+//
+//                        // Start advertising the service
+//                        
+//            peripheral.startAdvertising([
+//                            CBAdvertisementDataServiceUUIDsKey: [service.uuid],
+//                            CBAdvertisementDataLocalNameKey: "Rave Peripheral"
+//            ])
             
-            let advertisingData: [String: Any] = [
-                CBAdvertisementDataServiceUUIDsKey: [CBUUID.serivceUUID],
+            
+            let advertisingDummy: [String: Any] = [
+                CBAdvertisementDataServiceUUIDsKey: [CBUUID.serviceUUID],
                 CBAdvertisementDataLocalNameKey: "Rave Peripheral"
             ]
-            peripheral.startAdvertising(advertisingData)
+            
+            peripheral.startAdvertising(advertisingDummy)
             //print(peripheral?.value(forKey: .serivceUUID) ?? "null")
         }
     }
